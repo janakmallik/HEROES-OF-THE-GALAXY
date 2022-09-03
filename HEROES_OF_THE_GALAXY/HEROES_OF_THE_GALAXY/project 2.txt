@@ -1,0 +1,23 @@
+if (enemy[1].mode == 1)
+	{
+		enemy[1].Ey += ENEMY_SPEED;
+
+	}
+
+	if (enemy[2].mode == 1)
+	{
+		enemy[2].Ey += ENEMY_SPEED;
+
+	}
+
+	if (enemy[3].mode == 1)
+	{
+		enemy[3].Ey += ENEMY_SPEED;
+
+	}
+
+	if (enemy[4].mode == 1)
+	{
+		enemy[4].Ey += ENEMY_SPEED;
+
+	}

@@ -1,0 +1,11 @@
+void e_move(void)
+{
+
+		enemy[0].Ey -= ENEMY_SPEED;
+		if (enemy[0].Ey == 0)
+		{
+			enemy[0].Ey = 800;
+			enemy[0].Ex = rand() % 900;
+		}
+
+}

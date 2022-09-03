@@ -1,0 +1,591 @@
+void enemydraw(void);
+
+
+void E_pos()
+{
+		
+		Ey=Ey-5;
+		Ex=Ex+5;
+		//Ey=Ey-5;
+		//Ex=Ex-5;
+		if (Ey <= 10)
+		{
+			Ey = 700;
+			Ex = rand() % 700;
+		}
+
+}
+
+
+//enemy_ship.bmp
+	//iShowBMP(bi, bj, bullet);
+	
+	
+	
+	//iShowBMP(shipx, shipy - 70, shipefire);
+	
+	
+	//printf(" number of times idraw clalled: %d \n",n);
+	//n++;
+	//iFilledRectangle(10, 10, 100, 100);
+	//iSetColor(255, 255, 255);
+	/*if (gameState == 0)
+	{
+		//homeMenu
+		//iShowBMP(0, 0, homeMenu);
+	}*/
+
+
+int a = shipx + 35;
+//int b = shipy;
+int bi;
+int bj = shipy+10;
+void b_pos()
+{
+	
+	//bi = a;
+
+	if (bj>=674)
+	{
+		a = shipx + 35;
+
+		bj = shipy+10;
+		//a = shipx + 35;
+	
+	}
+	bi = a;
+	bj = bj + 55;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include "iGraphics.h"
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Idraw Here::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::://
+#define SCREEN_LEN 1000
+#define SCREEN_WIDTH 800
+#define MAX_BULLET 5
+#define BULLET_SPEED 15
+
+#define MAX_ENEMY 4
+#define ENEMY_SPEED 0
+
+#define MENU 0
+#define GAME 3
+#define INSTRUCTION 1
+#define HIGHSCORE 2
+#define PAUSE 4
+#define CREDITS 6
+#define GAMEOVER 7
+#define INTRO 8
+
+void createBullet(int bulletX, int bulletY);
+void resetBullet(int bulletNumber);
+void movement(void);
+void bulletDraw(void);
+
+void createEnemy(int Ex, int Ey);
+void resetEnemy(int enemyNumber);
+void e_move(void);
+void enemyDraw(void);
+
+struct bulletStruct
+{
+	int mode;
+	int bulletX;
+	int bulletY;
+
+};
+
+struct enemyStruct
+{
+	int Emode;
+	int Ex;
+	int Ey;
+
+};
+
+struct enemyStruct enemy[MAX_ENEMY] = { 0 };
+struct bulletStruct bullet[MAX_BULLET] = { 0 };
+
+void createEnemy(int Ex, int Ey)
+{
+	
+	int i;
+	for (i = 0; i < MAX_ENEMY; i++)
+	{
+		if (enemy[i].Emode == 0)
+		{
+			break;
+		}
+	}
+	enemy[i].Emode = 1;
+	enemy[i].Ex = Ex;
+	enemy[i].Ey = Ey;
+}
+
+void createBullet(int bulletX, int bulletY)
+{
+
+	int i;
+	for (i = 0; i < MAX_BULLET ; i++)
+	{
+		if (bullet[i].mode == 0)
+		{
+			break;
+		}
+	}
+	bullet[i].mode = 1;
+	bullet[i].bulletX = bulletX;
+	bullet[i].bulletY = bulletY;
+}
+
+void resetBullet(int bulletNumber)
+{
+	bullet[bulletNumber].mode = 0;
+	bullet[bulletNumber].bulletX = 2000;
+	bullet[bulletNumber].bulletY = 2000;
+}
+
+void resetEnemy(int enemyNumber)
+{
+	enemy[enemyNumber].Emode = 0;
+	enemy[enemyNumber].Ex = 2000;
+	enemy[enemyNumber].Ey = 2000;
+
+}
+
+
+void enemyDraw(void)
+{
+
+	if (enemy[0].Emode == 1)
+	{
+
+		iShowBMP2(enemy[0].Ex, enemy[0].Ey, "enemy_ship.bmp", 0);
+
+
+
+		if (enemy[0].Ey = 0)
+		{
+			resetEnemy(0);
+		}
+
+
+	}
+
+	if (enemy[1].Emode == 1)
+	{
+
+		iShowBMP2(enemy[1].Ex, enemy[1].Ey, "enemy_ship.bmp", 0);
+
+
+		if (enemy[1].Ey = 0)
+		{
+			resetEnemy(1);
+		}
+
+
+	}
+
+	if (enemy[2].Emode == 1)
+	{
+
+		iShowBMP2(enemy[2].Ex, enemy[2].Ey, "enemy_ship.bmp", 0);
+
+
+		if (enemy[2].Ey = 0)
+		{
+			resetEnemy(2);
+		}
+	}
+
+	if (enemy[3].Emode == 1)
+	{
+
+		iShowBMP2(enemy[3].Ex, enemy[3].Ey, "enemy_ship.bmp", 0);
+
+
+		if (enemy[3].Ey = 0)
+		{
+			resetEnemy(3);
+		}
+	}
+
+	if (enemy[4].Emode == 1)
+	{
+
+		iShowBMP2(enemy[4].Ex, enemy[4].Ey, "enemy_ship.bmp", 0);
+
+
+		if (enemy[4].Ey = 0)
+		{
+			resetEnemy(4);
+		}
+	}
+}
+
+void bulletDraw(void)
+{
+
+	if (bullet[0].mode == 1)
+	{
+
+		iShowBMP2(bullet[0].bulletX, bullet[0].bulletY, "b\\bullet0.bmp", 0);
+
+
+
+		if (bullet[0].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(0);
+		}
+
+
+	}
+
+	if (bullet[1].mode == 1)
+	{
+
+		iShowBMP2(bullet[1].bulletX, bullet[1].bulletY, "b\\bullet0.bmp", 0);
+
+
+		if (bullet[1].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(1);
+		}
+
+
+	}
+
+	if (bullet[2].mode == 1)
+	{
+
+		iShowBMP2(bullet[2].bulletX, bullet[2].bulletY, "b\\bullet0.bmp", 0);
+
+
+		if (bullet[2].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(2);
+		}
+	}
+
+	if (bullet[3].mode == 1)
+	{
+
+		iShowBMP2(bullet[3].bulletX, bullet[3].bulletY, "b\\bullet0.bmp", 0);
+
+
+		if (bullet[3].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(3);
+		}
+	}
+
+	if (bullet[4].mode == 1)
+	{
+
+		iShowBMP2(bullet[4].bulletX, bullet[4].bulletY, "b\\bullet0.bmp", 0);
+
+
+		if (bullet[4].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(4);
+		}
+	}
+
+	if (bullet[5].mode == 1)
+	{
+
+		iShowBMP2(bullet[5].bulletX, bullet[5].bulletY, "b\\bullet0.bmp", 0);
+
+
+		if (bullet[5].bulletY > SCREEN_WIDTH)
+		{
+			resetBullet(5);
+		}
+	}
+}
+
+void movement(void)
+{
+	if (bullet[0].mode == 1)
+	{
+		bullet[0].bulletY += BULLET_SPEED;
+
+	}
+
+	if (bullet[1].mode == 1)
+	{
+		bullet[1].bulletY += BULLET_SPEED;
+
+	}
+
+	if (bullet[2].mode == 1)
+	{
+		bullet[2].bulletY += BULLET_SPEED;
+
+	}
+
+	if (bullet[3].mode == 1)
+	{
+		bullet[3].bulletY += BULLET_SPEED;
+
+	}
+
+	if (bullet[4].mode == 1)
+	{
+		bullet[4].bulletY += BULLET_SPEED;
+
+	}
+
+	if (bullet[5].mode == 1)
+	{
+		bullet[5].bulletY += BULLET_SPEED;
+
+	}
+
+}
+
+void e_move(void)
+{
+	//enemy ship
+	if (enemy[0].Emode == 1)
+	{
+		enemy[0].Ey -= ENEMY_SPEED;
+
+	}
+
+	if (enemy[1].Emode == 1)
+	{
+		enemy[1].Ey = enemy[1].Ey - ENEMY_SPEED;
+
+	}
+
+	if (enemy[2].Emode == 1)
+	{
+		enemy[2].Ey -= ENEMY_SPEED;
+
+	}
+
+	if (enemy[3].Emode == 1)
+	{
+		enemy[3].Ey -= ENEMY_SPEED;
+
+	}
+
+	if (enemy[4].Emode == 1)
+	{
+		enemy[4].Ey -= ENEMY_SPEED;
+
+	}
+}
+
+
+char button[10][20] = { "bt\\enter.bmp", "bt\\scores.bmp", "bt\\instructions.bmp", "bt\\credits.bmp" };
+char homeMenu[15] = "bi\\home.bmp";
+char scores[25] = "bi\\scores.bmp";
+char ins[25] = "bi\\instructions.bmp";
+char credits[25] = "bi\\credits.bmp";
+char SpaceShip[25] = "spaceship_fire.bmp";
+char shipefire[25] = "spacefire.bmp";
+char asteroids[5][100] = { "as\\as-01.bmp", "as\\as-02.bmp"};
+
+int j=120;
+int Bnum = 0;
+
+int shipx = 500;
+int shipy = 0;
+
+
+int i = 500;
+int i2 = 700;
+int j2 = 500;
+
+void as2_pos()
+{
+		
+		i=i-5;
+		if (i <= 10)
+		{
+			i = 700;
+			j = rand() % 500;
+		}
+		
+}
+
+
+void as1_pos()
+{
+
+	i2 = i2 - 5;
+	if (i2 <= 10)
+	{
+		i2 = 700;
+		j2 = rand() % 700;
+	}
+
+}
+
+
+
+
+/*void en_b_pos()
+{
+	
+	//bi = Ea;
+
+	if (bj==0)
+	{
+		a = EnemeShipX + 35;
+
+		bj = EnemeShipY+150;
+		//a = shipx + 35;
+	
+	}
+	Ebi = Ea;
+	Ebj = Ebj-25;
+
+}*/
+
+void iDraw()
+{
+	iClear();
+	bulletDraw();
+	
+	
+	enemyDraw();
+
+	iShowBMP(shipx, shipy, SpaceShip);
+
+
+	iShowBMP(j, i, "as\\as-01.bmp");
+	iShowBMP(j2, i2, "as\\as-02.bmp");
+
+
+	//enemyDraw();
+	//ishowBMP(ebi,ebi, enemebullet);
+	//iShowBMP(Ex+22.5, Ey-25, "enemy_bullet2.bmp");
+	//iShowBMP(Ex , Ey , "enemy_ship.bmp");
+
+}
+
+/*function iMouseMove() is called when the user presses and drags the mouse.
+(mx, my) is the position where the mouse pointer is.
+*/
+
+
+void iMouseMove(int mx, int my)
+{
+	
+}
+//*******************************************************************ipassiveMouse***********************************************************************//
+void iPassiveMouseMove(int mx, int my)
+{
+	
+}
+
+void iMouse(int button, int state, int mx, int my)
+{
+	
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		createBullet(shipx + 35, shipy + 150);
+		
+	}
+	
+	
+	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+		
+	}
+}
+
+
+
+void iKeyboard(unsigned char key)
+{
+	if (key == 'a')
+	{
+		shipx = shipx - 5;
+	}
+
+	if (key == 'd')
+	{
+		shipx = shipx + 5;
+	}
+	
+	if (key == 's')
+	{
+		shipy = shipy - 5;
+	}
+
+	if (key == 'w')
+	{
+		shipy = shipy + 5;
+	}
+	if (key == 'p')
+	{
+		createBullet(shipx + 35, shipy+150);
+	}
+	
+}
+
+/*
+function iSpecialKeyboard() is called whenver user hits special keys like-
+function keys, home, end, pg up, pg down, arraows etc. you have to use
+appropriate constants to detect them. A list is:
+GLUT_KEY_F1, GLUT_KEY_F2, GLUT_KEY_F3, GLUT_KEY_F4, GLUT_KEY_F5, GLUT_KEY_F6,
+GLUT_KEY_F7, GLUT_KEY_F8, GLUT_KEY_F9, GLUT_KEY_F10, GLUT_KEY_F11, GLUT_KEY_F12,
+GLUT_KEY_LEFT, GLUT_KEY_UP, GLUT_KEY_RIGHT, GLUT_KEY_DOWN, GLUT_KEY_PAGE UP,
+GLUT_KEY_PAGE DOWN, GLUT_KEY_HOME, GLUT_KEY_END, GLUT_KEY_INSERT
+*/
+void iSpecialKeyboard(unsigned char key)
+{
+
+	
+	if (key == GLUT_KEY_RIGHT)
+	{
+				
+	}
+	if (key == GLUT_KEY_LEFT)
+	{
+		
+	}
+	
+	if (key == GLUT_KEY_HOME)
+	{
+		
+	}
+	
+}
+
+
+int main()
+{
+	///srand((unsigned)time(NULL));
+	iSetTimer(40, as1_pos);
+	iSetTimer(70, as2_pos);
+	//iSetTimer(200, as3_pos);
+
+	//iSetTimer(100, E_pos);
+	iSetTimer(100, movement);
+	iSetTimer(100, e_move);
+
+	iInitialize(1200, 700, "HEROES OF THE GALAXY");
+
+	
+	iStart();
+	return 0;
+}
